@@ -100,7 +100,7 @@ function showRandomQuote() {
   sessionStorage.setItem("lastViewedQuote", JSON.stringify(quote));
 }
 
-function addQuote() {
+function createAddQuoteForm() {
   const newQuoteText = document.getElementById("newQuoteText").value.trim();
   const newQuoteCategory = document
     .getElementById("newQuoteCategory")
@@ -122,9 +122,11 @@ function addQuote() {
   // Update UI elements
   document.getElementById("newQuoteText").value = "";
   document.getElementById("newQuoteCategory").value = "";
+}
 
-  populateCategories(); // Task 2: Update filter dropdown if a new category was added
-  showRandomQuote(); // Show the new quote or another random one
+function addQuote() {
+  populateCategories();
+  showRandomQuote();
   alert("Quote added successfully!");
 }
 
