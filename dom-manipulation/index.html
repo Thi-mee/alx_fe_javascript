@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Quote Generator</title>
+  </head>
+  <body>
+    <h1>Dynamic Quote Generator</h1>
+
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter" onchange="filterQuotes()">
+      <option value="all">All Categories</option>
+    </select>
+    <hr />
+
+    <div id="quoteDisplay"></div>
+    <button id="newQuote">Show New Quote</button>
+
+    <hr />
+    <h2>Add a New Quote</h2>
+    <div>
+      <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+      <input
+        id="newQuoteCategory"
+        type="text"
+        placeholder="Enter quote category"
+      />
+      <button onclick="addQuote()">Add Quote</button>
+    </div>
+    <hr />
+
+    <h2>Data Management</h2>
+    <div>
+      <button onclick="exportQuotes()">Export Quotes (JSON)</button>
+      <label for="importFile">Import Quotes (JSON):</label>
+      <input
+        type="file"
+        id="importFile"
+        accept=".json"
+        onchange="importFromJsonFile(event)"
+      />
+    </div>
+    <hr />
+
+    <button onclick="syncWithServer()">Sync Data with Server</button>
+    <div id="syncStatus"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
