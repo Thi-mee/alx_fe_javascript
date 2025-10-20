@@ -271,6 +271,8 @@ function syncWithServer() {
       syncStatus.textContent =
         "Sync Complete: Local data was already up to date with the server.";
     }
+
+    console.log('"Quotes synced with server!"');
   }, 1500); // Simulate network latency of 1.5 seconds
 }
 
