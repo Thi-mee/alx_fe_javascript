@@ -128,6 +128,7 @@ function addQuote() {
   populateCategories();
   showRandomQuote();
   alert("Quote added successfully!");
+  postNewQuoteToServer(newQuote);
 }
 
 function populateCategories() {
@@ -279,6 +280,44 @@ const SERVER_API_URL = "https://jsonplaceholder.typicode.com/posts";
 const SYNC_INTERVAL_MS = 30000; // Check every 30 seconds (Requirement: Periodically checking)
 
 const syncStatus = document.getElementById("syncStatus");
+
+/**
+ * Simulates posting a newly added quote to the server.
+ * (Requirement: Check for posting data to the server using a mock API)
+ */
+async function postNewQuoteToServer(quote) {
+  // The JSONPlaceholder mock API doesn't actually store data, but it requires
+  // these parameters to simulate a successful POST request.
+  try {
+    const response = await fetch(SERVER_API_URL, {
+      // Requirement: method: 'POST'
+      method: "POST",
+      // Requirement: headers and Content-Type
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // Using the quote data structure for the body
+        title: quote.text,
+        body: quote.category,
+        userId: 1, // required by JSONPlaceholder mock API
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // The mock server returns the posted data with a new ID
+    const postedData = await response.json();
+    console.log(
+      `Quote successfully posted to server with mock ID: ${postedData.id}`
+    );
+  } catch (error) {
+    console.error("Failed to post quote to server:", error);
+    // You could add a UI notification here for real-world scenarios
+  }
+}
 
 /**
  * Fetches data from the mock server and updates local storage with conflict resolution.
