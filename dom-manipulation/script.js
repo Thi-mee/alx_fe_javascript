@@ -232,6 +232,10 @@ const MOCK_SERVER_DATA = [
   },
 ];
 
+function fetchQuotesFromServer() {
+  return MOCK_SERVER_DATA;
+}
+
 function syncWithServer() {
   const syncStatus = document.getElementById("syncStatus");
   syncStatus.textContent = "Syncing...";
@@ -244,7 +248,7 @@ function syncWithServer() {
     const localQuoteTexts = new Set(quotes.map((q) => q.text));
     let newQuotesAdded = 0;
 
-    MOCK_SERVER_DATA.forEach((serverQuote) => {
+    fetchQuotesFromServer().forEach((serverQuote) => {
       // Simple Conflict Resolution Strategy: If the server has a quote we don't, add it.
       // (Assuming identical text means the same quote, ignoring minor category changes)
       if (!localQuoteTexts.has(serverQuote.text)) {
